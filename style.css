@@ -58,7 +58,7 @@ input:focus{
     border: none;
     border-radius: 5px;
 }
-btn2:hover {
+.btn2:hover {
     box-shadow: 1px 1px 10px 1px rgb(170,68,176);
 }
 #password {
@@ -79,10 +79,26 @@ btn2:hover {
     border-left: none;
     outline: none;
 }
+.btn {
+    top: 304px;
+}
 #password:focus {
     outline: none !important;
 }
 button i {
     font-size: 15px;
     color: rgb(170,68,176);
+}
+p {
+    /* margin-top: -100px; */
+    text-align: center;
+    color: black;
+    font-weight: 700;
+}
+a {
+    color: rgb(231,64,154);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }

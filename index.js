@@ -13,6 +13,11 @@ const change = ()=>{
         eye.classList.remove('fa-eye')
     }
 }
+function padLeadingZeros(num, size) {
+    let s = num+"";
+    while (s. length < size) s = "0" + s;
+    return s
+}
 const signUp = ()=>{
     let randomNumber = Math.floor(Math.random() * 10000) + 1
     let date = new Date()
