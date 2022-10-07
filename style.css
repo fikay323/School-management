@@ -40,5 +40,13 @@ input:focus{
 }
 button {
     display: block;
-    margin: auto;
+    margin: 20px auto;
+    width: 70%;
+    font-weight: 700;
+    padding: 10px;
+    background: linear-gradient(to right,rgb(170,68,176), rgb(231,64,154));
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
 }
