@@ -1,4 +1,18 @@
 let i = 1
+let inp = document.getElementById('password')
+let eye = document.querySelector('.fa-solid')
+const change = ()=>{
+    if(inp.type == 'password') {
+        inp.type = 'text'
+        eye.classList.remove('fa-eye-slash')
+        eye.classList.add('fa-eye')
+    }
+    else {
+        inp.type = 'password'
+        eye.classList.add('fa-eye-slash')
+        eye.classList.remove('fa-eye')
+    }
+}
 const signUp = ()=>{
     let student ={}
     student.firstName = firstname.value
