@@ -14,6 +14,12 @@ const change = ()=>{
     }
 }
 const signUp = ()=>{
+    let randomNumber = Math.floor(Math.random() * 10000) + 1
+    let date = new Date()
+    let month = date.getMonth()
+    let day = date.getDay()
+    let year = date.getFullYear()
+    let signDate = `${padLeadingZeros(day, 2)}/${padLeadingZeros(month, 2)}/${year}`
     let student ={}
     student.firstName = firstname.value
     student.lastName = lastname.value
@@ -21,6 +27,8 @@ const signUp = ()=>{
     student.passWord = password.value
     student.age = age.value
     student.phone = phoneNumber.value
+    student.matricNum = 'SQI'+padLeadingZeros(randomNumber, 5)
+    student.dateSign = signDate
     let stringStudent = JSON.stringify(student)
     localStorage.setItem('student', stringStudent)
 }
