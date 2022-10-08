@@ -62,15 +62,15 @@ input:focus{
     box-shadow: 1px 1px 10px 1px rgb(170,68,176);
 }
 #password {
-    width: calc(80% - 35px) !important;
-    margin-left: -40px;
     position: relative;
     border-right: none;
 }
+.cont {
+    display: flex;
+    align-items: center;
+    width: calc(80% + 53px) !important;
+}
 .btn1 {
-    position: absolute;
-    top: 331px;
-    right: 131px;
     height: 37px;
     width: 37px;
     background-color: white;
