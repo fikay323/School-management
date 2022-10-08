@@ -1,4 +1,4 @@
-let unParsedStudent = localStorage.getItem('student')
+let unParsedStudent = localStorage.getItem('active')
 let student = JSON.parse(unParsedStudent)
 console.log(student);
 let nameDiv = document.querySelector('.name')

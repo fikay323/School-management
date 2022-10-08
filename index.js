@@ -1,4 +1,4 @@
-let i = 1
+let i = localStorage.length
 let inp = document.getElementById('password')
 let eye = document.querySelector('.fa-solid')
 const change = ()=>{
@@ -35,5 +35,7 @@ const signUp = ()=>{
     student.matricNum = 'SQI'+padLeadingZeros(randomNumber, 5)
     student.dateSign = signDate
     let stringStudent = JSON.stringify(student)
-    localStorage.setItem('student', stringStudent)
+    localStorage.setItem(i, stringStudent)
+    i++
+    
 }
