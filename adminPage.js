@@ -53,7 +53,7 @@ function signUp() {
     let day = date.getDay()
     let year = date.getFullYear()
     let signDate = `${padLeadingZeros(day, 2)}/${padLeadingZeros(month, 2)}/${year}`
-    var obj = {}
+    let obj = {}
     obj.firstName = first.value
     obj.lastName = second.value
     obj.email = third.value
@@ -146,19 +146,38 @@ function deleted(i) {
 function edit(i) {
     info.innerHTML+= `<button class='save' onclick="save(${i})">Save</button>`
     editLayer.style.visibility = 'visible'
-    first2.value = allStudents[i].FirstName
-    second2.value = allStudents[i].LastName
-    third2.value = allStudents[i].Email
-    fourth2.value = allStudents[i].Password
+    first2.value = allStudents[i].firstName
+    second2.value = allStudents[i].lastName
+    third2.value = allStudents[i].email
+    fourth2.value = allStudents[i].passWord
 }
 
-// function save(i) {
-//     allStudents[i].FirstName = first2.value
-//     allStudents[i].LastName = second2.value
-//     allStudents[i].Email = third2.value
-//     allStudents[i].Password = fourth2.value
-//     document.querySelector('.save').remove()
-//     // localStorage.setItem(localStorage.length, JSON.stringify(allStudents))
-//     display()
-//     editLayer.style.visibility ='hidden'
-// }
+function save(i) {
+    if (allStudents.length > 0) {
+        for(let k = 0; k< localStorage.length; k++) {
+            if(localStorage.key(k) !== 'active') {
+                let bob = localStorage.getItem(localStorage.key(k))
+                let parsebob = JSON.parse(bob)
+                if(typeof parsebob === 'object' && parsebob.email === allStudents[i].email) {
+                    let obj = {}
+                    obj.firstName = first2.value
+                    obj.lastName = second2.value
+                    obj.email = third2.value
+                    obj.passWord = fourth2.value
+                    obj.age = fifth2.value
+                    obj.phone = sixth2.value
+                }
+            }
+        }
+        // allStudents.splice(i, 1)
+        // display()
+    }
+    allStudents[i].firstName = first2.value
+    allStudents[i].lastName = second2.value
+    allStudents[i].email = third2.value
+    allStudents[i].passWord = fourth2.value
+    console.log(allStudents);
+    document.querySelector('.save').remove()
+    display()
+    editLayer.style.visibility ='hidden'
+}
