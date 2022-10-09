@@ -150,6 +150,8 @@ function edit(i) {
     second2.value = allStudents[i].lastName
     third2.value = allStudents[i].email
     fourth2.value = allStudents[i].passWord
+    fifth2.value = allStudents[i].age
+    sixth2.value = allStudents[i].phone
 }
 
 function save(i) {
@@ -166,17 +168,19 @@ function save(i) {
                     obj.passWord = fourth2.value
                     obj.age = fifth2.value
                     obj.phone = sixth2.value
+                    obj.dateSign = parsebob.dateSign
+                    obj.matricNum = parsebob.matricNum
+                    localStorage.setItem(localStorage.key(k), JSON.stringify(obj))
                 }
             }
         }
-        // allStudents.splice(i, 1)
-        // display()
     }
     allStudents[i].firstName = first2.value
     allStudents[i].lastName = second2.value
     allStudents[i].email = third2.value
     allStudents[i].passWord = fourth2.value
-    console.log(allStudents);
+    allStudents[i].age = fifth2.value
+    allStudents[i].phone = sixth2.value
     document.querySelector('.save').remove()
     display()
     editLayer.style.visibility ='hidden'
