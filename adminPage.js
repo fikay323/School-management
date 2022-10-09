@@ -5,18 +5,23 @@ let info = document.querySelector('.info')
 let total = document.querySelector('.total')
 let allStudents = []
 function local() {
-    for(let i = 0; i< localStorage.length; i++) {
-        let bob = localStorage.getItem(localStorage.key(i))
-        let parsebob = JSON.parse(bob)
-        if(typeof parsebob === 'object') {
-            allStudents[i] = parsebob
+    if(localStorage.length>1) { 
+        for(let i = 0; i< localStorage.length; i++) {
+           if(localStorage.key(i) !== 'active') {
+                let bob = localStorage.getItem(localStorage.key(i))
+                let parsebob = JSON.parse(bob)
+                if(typeof parsebob === 'object') {
+                    allStudents.push(parsebob)
+                }
+            }
         }
+        let filtered = allStudents.filter(function (el) {
+            return el != null;
+        })
+        allStudents = filtered
+        console.log(allStudents);
+        display()
     }
-    let filtered = allStudents.filter(function (el) {
-        return el != null;
-      });
-    allStudents = filtered
-    display()
 }
 var data
 function padLeadingZeros(num, size) {
@@ -24,23 +29,23 @@ function padLeadingZeros(num, size) {
     while (s. length < size) s = "0" + s;
     return s
 }
-function checkEmail() {
-    if(allStudents.length !== 0) {
-        let emailValue = third.value
-        console.log(allStudents);
-        for(i=0; i<allStudents.length; i++) {
-            if (allStudents[i].Email === emailValue) {
-                alert('An account has already been registered with this email')
-            }
-            else {
-                signUp()
-            }
-        }
-    }
-    else{
-        signUp()
-    }
-}
+// function checkEmail() {
+//     if(allStudents.length !== 0) {
+//         let emailValue = third.value
+//         console.log(allStudents);
+//         for(i=0; i<allStudents.length; i++) {
+//             if (allStudents[i].Email === emailValue) {
+//                 alert('An account has already been registered with this email')
+//             }
+//             else {
+//                 signUp()
+//             }
+//         }
+//     }
+//     else{
+//         signUp()
+//     }
+// }
 function signUp() {
     let randomNumber = Math.floor(Math.random() * 10000) + 1
     let date = new Date()
@@ -49,16 +54,16 @@ function signUp() {
     let year = date.getFullYear()
     let signDate = `${padLeadingZeros(day, 2)}/${padLeadingZeros(month, 2)}/${year}`
     var obj = {}
-    obj.FirstName = first.value
-    obj.LastName = second.value
-    obj.Email = third.value
-    obj.Password = fourth.value
-    obj.Age = fifth.value
-    obj.Phone = sixth.value
-    obj.MatricNum = 'SQI'+padLeadingZeros(randomNumber, 5)
+    obj.firstName = first.value
+    obj.lastName = second.value
+    obj.email = third.value
+    obj.passWord = fourth.value
+    obj.age = fifth.value
+    obj.phone = sixth.value
+    obj.matricNum = 'SQI'+padLeadingZeros(randomNumber, 5)
     obj.dateSign = signDate
     allStudents.push(obj);
-    localStorage.setItem('allStudents', JSON.stringify(allStudents))
+    localStorage.setItem(localStorage.length, JSON.stringify(obj))
     display()
     first.value=''
     second.value=''
@@ -69,12 +74,20 @@ function signUp() {
 }
 
 function display() {
-    if(localStorage.allStudents) {
-        let bob = localStorage.getItem('allStudents')
-        let parseBob = JSON.parse(bob)
-        allStudents = parseBob
-    }
-    // console.log(allStudents);
+    // if(localStorage.length>1) { 
+    //     for(let i = 0; i< localStorage.length; i++) {
+    //         let bob = localStorage.getItem(localStorage.key(i))
+    //         let parsebob = JSON.parse(bob)
+    //         if(typeof parsebob === 'object') {
+    //             allStudents[i] = parsebob
+    //         }
+    //     }
+    //     let filtered = allStudents.filter(function (el) {
+    //         return el != null;
+    //     })
+    //     allStudents = filtered
+    //     console.log(allStudents);
+    // }
     data =''
     if (allStudents.length > 0) {
         total.innerHTML = allStudents.length
@@ -84,13 +97,13 @@ function display() {
     }
     for (let i =0; i<allStudents.length; i++) {
         let sn = i
-        firstname = allStudents[i].FirstName
-        lastname = allStudents[i].LastName
-        email = allStudents[i].Email
-        Password = allStudents[i].Password
-        Age = allStudents[i].Age
-        Phone = allStudents[i].Phone
-        MatricNum = allStudents[i].MatricNum
+        firstname = allStudents[i].firstName
+        lastname = allStudents[i].lastName
+        email = allStudents[i].email
+        Password = allStudents[i].passWord
+        Age = allStudents[i].age
+        Phone = allStudents[i].phone
+        MatricNum = allStudents[i].matricNum
         signDate = allStudents[i].dateSign
         data += `<tr>
                     <td style='text-align:center;'>${sn+1}</td>
@@ -111,15 +124,22 @@ function display() {
 
 function deleted(i) {
     let index = i
-    allStudents.splice(index, 1)
     if (allStudents.length > 0) {
-        localStorage.setItem('allStudents', JSON.stringify(allStudents))
+        for(let k = 0; k< localStorage.length; k++) {
+            if(localStorage.key(k) !== 'active') {
+                let bob = localStorage.getItem(localStorage.key(k))
+                let parsebob = JSON.parse(bob)
+                if(typeof parsebob === 'object' && parsebob.email === allStudents[i].email) {
+                    localStorage.removeItem(localStorage.key(k))
+                }
+            }
+        }
+        allStudents.splice(index, 1)
         display()
     }
     else {
         body.innerHTML = ''
         total.innerHTML = '0'
-        localStorage.removeItem('allStudents')
     }
 }
 
@@ -132,13 +152,13 @@ function edit(i) {
     fourth2.value = allStudents[i].Password
 }
 
-function save(i) {
-    allStudents[i].FirstName = first2.value
-    allStudents[i].LastName = second2.value
-    allStudents[i].Email = third2.value
-    allStudents[i].Password = fourth2.value
-    document.querySelector('.save').remove()
-    localStorage.setItem('allStudents', JSON.stringify(allStudents))
-    display()
-    editLayer.style.visibility ='hidden'
-}
+// function save(i) {
+//     allStudents[i].FirstName = first2.value
+//     allStudents[i].LastName = second2.value
+//     allStudents[i].Email = third2.value
+//     allStudents[i].Password = fourth2.value
+//     document.querySelector('.save').remove()
+//     // localStorage.setItem(localStorage.length, JSON.stringify(allStudents))
+//     display()
+//     editLayer.style.visibility ='hidden'
+// }
