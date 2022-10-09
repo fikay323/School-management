@@ -13,7 +13,7 @@ div {
 }
 
 form, main {
-    background-color: white;
+    background: white;
     width: 80%;
     max-width: 500px;
     border-radius: 20px;
@@ -61,6 +61,9 @@ input:focus{
 }
 .btn2:hover {
     box-shadow: 1px 1px 10px 1px rgb(170,68,176);
+}
+.btn2:active {
+    scale: 0.9;
 }
 #password {
     position: relative;

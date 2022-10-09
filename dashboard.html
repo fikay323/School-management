@@ -5,19 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
     <style>
-        h1 {
-            display: inline-block;
-        }
+        
     </style>
 </head>
 <body>
-    <h1>Welcome </h1> <h1 class="name"></h1>
-    <p class="email">Email:</p>
-    <p class="matNo">Matric Number: </p>
-    <p class="age">Age: </p>
-    <p class="regDate">Date Registered: </p>
-    <p class="phone">Phone Number:</p>
+    <header>
+        <h1 class="name">Welcome </h1>
+    </header>
+    <p class="firstname details">Firstname:</p>
+    <p class="lastname details">Lastname:</p>
+    <p class="email details">Email:</p>
+    <p class="matNo details">Matric Number: </p>
+    <p class="age details">Age: </p>
+    <p class="regDate details">Date Registered: </p>
+    <p class="phone details">Phone Number:</p>
+    <p onclick="logOut()" class="log">Log Out here <i class="fa-solid fa-chevron-right"></i></p>
     <script src="./dashboard.js"></script>
+    <script src="https://kit.fontawesome.com/c36b48a40a.js" crossorigin="anonymous"></script>
 </body>
 </html>

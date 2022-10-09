@@ -8,11 +8,13 @@ if(localStorage.length>1) {
             allStudents[i] = parsebob
         }
     }
-    let filtered = allStudents.filter(function (el) {
-        return el != null;
-    })
+    let filtered = []
+    for (let i = 0; i < allStudents.length; i++) {;
+        if(allStudents[i] != null) {
+            filtered.push(allStudents[i])
+        }
+    }
     allStudents = filtered
-    console.log(allStudents);
 }
 let inp = document.getElementById('password')
 let eye = document.querySelector('.fa-solid')
@@ -29,7 +31,6 @@ const change = ()=>{
     }
 }
 const signIn = ()=>{
-    let isFound = false
     for(i=0; i<allStudents.length; i++){
         let emal = allStudents[i].email
         let pass = allStudents[i].passWord

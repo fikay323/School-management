@@ -4,7 +4,7 @@ let editLayer = document.querySelector('.edit-layer')
 let info = document.querySelector('.info')
 let total = document.querySelector('.total')
 let allStudents = []
-function local() {
+const getLocal = ()=>{
     if(localStorage.length>1) { 
         for(let i = 0; i< localStorage.length; i++) {
            if(localStorage.key(i) !== 'active') {
@@ -23,34 +23,39 @@ function local() {
         display()
     }
 }
-var data
+const checkEmpty = ()=>{
+    let isEmpty = false
+    if(first.value === '' || second.value === '' || third.value === '' || fourth.value === '' || fifth.value === '' || sixth.value === '') {
+        isEmpty = true
+    }
+    isEmpty ? alert('Pls fill in all the required fields') : checkEmail()
+}
+const checkEmail = ()=>{
+    let isFound = false
+    if (localStorage.length > 0) {
+        for(let k = 0; k< localStorage.length; k++) {
+            let bob = localStorage.getItem(localStorage.key(k))
+            let parsebob = JSON.parse(bob)
+            if(typeof parsebob === 'object' && parsebob.email == third.value) {
+                isFound = true
+                break
+            }
+        }
+    }
+    isFound ? alert('An account has already been registered with this email') : signUp()
+}
 function padLeadingZeros(num, size) {
     let s = num+"";
-    while (s. length < size) s = "0" + s;
+    for(let i = s.length; i < size; i++) {
+        s='0'+s
+    }
     return s
 }
-// function checkEmail() {
-//     if(allStudents.length !== 0) {
-//         let emailValue = third.value
-//         console.log(allStudents);
-//         for(i=0; i<allStudents.length; i++) {
-//             if (allStudents[i].Email === emailValue) {
-//                 alert('An account has already been registered with this email')
-//             }
-//             else {
-//                 signUp()
-//             }
-//         }
-//     }
-//     else{
-//         signUp()
-//     }
-// }
-function signUp() {
+const signUp = ()=>{
     let randomNumber = Math.floor(Math.random() * 10000) + 1
     let date = new Date()
     let month = date.getMonth()
-    let day = date.getDay()
+    let day = date.getDate()
     let year = date.getFullYear()
     let signDate = `${padLeadingZeros(day, 2)}/${padLeadingZeros(month, 2)}/${year}`
     let obj = {}
@@ -62,6 +67,7 @@ function signUp() {
     obj.phone = sixth.value
     obj.matricNum = 'SQI'+padLeadingZeros(randomNumber, 5)
     obj.dateSign = signDate
+    obj.formerEmail = ''
     allStudents.push(obj);
     localStorage.setItem(localStorage.length, JSON.stringify(obj))
     display()
@@ -72,22 +78,8 @@ function signUp() {
     fifth.value=''
     sixth.value=''
 }
-
-function display() {
-    // if(localStorage.length>1) { 
-    //     for(let i = 0; i< localStorage.length; i++) {
-    //         let bob = localStorage.getItem(localStorage.key(i))
-    //         let parsebob = JSON.parse(bob)
-    //         if(typeof parsebob === 'object') {
-    //             allStudents[i] = parsebob
-    //         }
-    //     }
-    //     let filtered = allStudents.filter(function (el) {
-    //         return el != null;
-    //     })
-    //     allStudents = filtered
-    //     console.log(allStudents);
-    // }
+var data
+const display = ()=>{
     data =''
     if (allStudents.length > 0) {
         total.innerHTML = allStudents.length
@@ -105,6 +97,7 @@ function display() {
         Phone = allStudents[i].phone
         MatricNum = allStudents[i].matricNum
         signDate = allStudents[i].dateSign
+        formerEmail = allStudents[i].formerEmail
         data += `<tr>
                     <td style='text-align:center;'>${sn+1}</td>
                     <td>${firstname}</td>
@@ -122,7 +115,7 @@ function display() {
     }
 }
 
-function deleted(i) {
+const deleted = (i)=>{
     let index = i
     if (allStudents.length > 0) {
         for(let k = 0; k< localStorage.length; k++) {
@@ -142,8 +135,7 @@ function deleted(i) {
         total.innerHTML = '0'
     }
 }
-
-function edit(i) {
+const edit = (i)=>{
     info.innerHTML+= `<button class='save' onclick="save(${i})">Save</button>`
     editLayer.style.visibility = 'visible'
     first2.value = allStudents[i].firstName
@@ -153,8 +145,7 @@ function edit(i) {
     fifth2.value = allStudents[i].age
     sixth2.value = allStudents[i].phone
 }
-
-function save(i) {
+const save = (i)=>{
     if (allStudents.length > 0) {
         for(let k = 0; k< localStorage.length; k++) {
             if(localStorage.key(k) !== 'active') {
