@@ -22,10 +22,16 @@ header {
     padding: 10px;
     border-radius: 10px;
     font-weight: 700;
+    cursor: pointer;
 }
 .log:hover {
     box-shadow: 1px 1px 10px 1px rgb(125, 166, 197);
 }
 .log:active {
     scale: 0.9;
+}
+@media(max-width:500px) {
+    .log {
+        cursor: auto;
+    }
 }
