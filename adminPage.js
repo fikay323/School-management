@@ -153,6 +153,9 @@ const save = (i)=>{
                 let parsebob = JSON.parse(bob)
                 if(typeof parsebob === 'object' && parsebob.email === allStudents[i].email) {
                     let obj = {}
+                    obj.formerEmail = allStudents[i].email
+                    let prevEmail = obj.formerEmail
+                    let key = localStorage.key(k)
                     obj.firstName = first2.value
                     obj.lastName = second2.value
                     obj.email = third2.value
@@ -162,6 +165,7 @@ const save = (i)=>{
                     obj.dateSign = parsebob.dateSign
                     obj.matricNum = parsebob.matricNum
                     localStorage.setItem(localStorage.key(k), JSON.stringify(obj))
+                    changeActive(prevEmail, key)
                 }
             }
         }
@@ -175,4 +179,21 @@ const save = (i)=>{
     document.querySelector('.save').remove()
     display()
     editLayer.style.visibility ='hidden'
+}
+const changeActive = (prevEmail, key)=>{
+    if(localStorage.active) {
+        const active = JSON.parse(localStorage.getItem('active'))
+        console.log(active);
+        if(active.email === prevEmail) {
+            const changed = JSON.parse(localStorage.getItem(key))
+            active.firstName = changed.firstName
+            active.lastName = changed.lastName
+            active.email = changed.email
+            active.passWord = changed.passWord
+            active.age = changed.age
+            active.phone = changed.phone
+            localStorage.setItem('active', JSON.stringify(active))
+            console.log(active);
+        }
+    }
 }
