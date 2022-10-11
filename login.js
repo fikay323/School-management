@@ -63,7 +63,6 @@ const signIn = ()=>{
             else {
                 if(i===allStudents.length-1) {
                     wrong.style.display = 'block'
-                    // alert("Password is incorrect")
                 }
             }
         }
