@@ -1,11 +1,11 @@
 let student
-let allStudents =[]
-if(localStorage.length>1) { 
+let allStudents = []
+if(localStorage.length >= 1) { 
     for(let i = 0; i< localStorage.length; i++) {
         let bob = localStorage.getItem(localStorage.key(i))
         let parsebob = JSON.parse(bob)
         if(typeof parsebob === 'object') {
-            allStudents[i] = parsebob
+            allStudent.push(parsebob)
         }
     }
     let filtered = []
@@ -33,7 +33,7 @@ const change = ()=>{
 const cont = document.querySelector('.cont')
 const btn = document.querySelector('.btn2')
 const wrong = document.querySelector('.wrong')
-const signIn = ()=>{
+const signIn = () => {
     for(i=0; i<allStudents.length; i++){
         let emal = allStudents[i].email
         let pass = allStudents[i].passWord
