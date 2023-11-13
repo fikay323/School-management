@@ -1,20 +1,11 @@
-let student
 let allStudents = []
 if(localStorage.length >= 1) { 
     for(let i = 0; i< localStorage.length; i++) {
-        let bob = localStorage.getItem(localStorage.key(i))
-        let parsebob = JSON.parse(bob)
-        if(typeof parsebob === 'object') {
-            allStudent.push(parsebob)
+        let student = JSON.parse(localStorage.getItem(localStorage.key(i)))
+        if(typeof student === 'object') {
+            allStudents.push(student)
         }
     }
-    let filtered = []
-    for (let i = 0; i < allStudents.length; i++) {;
-        if(allStudents[i] != null) {
-            filtered.push(allStudents[i])
-        }
-    }
-    allStudents = filtered
 }
 let inp = document.getElementById('password')
 let eye = document.querySelector('.fa-solid')
@@ -35,8 +26,6 @@ const btn = document.querySelector('.btn2')
 const wrong = document.querySelector('.wrong')
 const signIn = () => {
     for(i=0; i<allStudents.length; i++){
-        let emal = allStudents[i].email
-        let pass = allStudents[i].passWord
         if(email.disabled === false) {
             if(allStudents[i].email === email.value) {
                 cont.style.display = 'flex'
@@ -55,7 +44,7 @@ const signIn = () => {
             }
         }
         else {
-            if (pass === password.value) {
+            if (allStudents[i].password === password.value) {
                 localStorage.setItem('active', JSON.stringify(allStudents[i]))
                 window.location.href = 'dashboard.html'
                 break
