@@ -24,8 +24,8 @@ const change = ()=>{
 const cont = document.querySelector('.cont')
 const btn = document.querySelector('.btn2')
 const wrong = document.querySelector('.wrong')
-const signInButton = document.querySelector('.btn2')
-signInButton.addEventListener('click', signIn)
+// const signInButton = document.querySelector('.btn2')
+// signInButton.addEventListener('click', signIn)
 const signIn = () => {
     for(i=0; i<allStudents.length; i++){
         if(email.disabled === false) {
