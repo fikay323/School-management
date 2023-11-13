@@ -46,7 +46,7 @@ const signIn = () => {
             }
         }
         else {
-            if (allStudents[i].password === password.value) {
+            if (allStudents[i].passWord === password.value) {
                 localStorage.setItem('active', JSON.stringify(allStudents[i]))
                 window.location.href = 'dashboard.html'
                 break
